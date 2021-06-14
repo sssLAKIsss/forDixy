@@ -8,7 +8,7 @@ public class MassiveSort {
         checkArrayForNull(array);
 
         List<String> arrayToList = addDepartmentCodes(array);
-        int numberOfSorts = findMaxSorts(arrayToList);
+        int numberOfSorts = findMaxElements(array);
 
         arrayToList.sort(Comparator.comparingInt(MassiveSort::findNumberOfElements));
         for (int k = numberOfSorts; k > 0; k--) {
@@ -21,17 +21,23 @@ public class MassiveSort {
         return arrayToList;
     }
 
-    public  List<String> addDepartmentCodes(String[] array) {
+    public List<String> addDepartmentCodes(String[] array) {
         checkArrayForNull(array);
 
         Set<String> arraySet = new HashSet<>(Set.of(array));
-        List.of(array).stream()
-                .filter(s -> findNumberOfElements(s) == 3)
-                .forEach(s -> {
-                    String[] buff = s.split("\\\\");
-                    arraySet.add(buff[0]);
-                    arraySet.add(buff[0] + "\\" + buff[1]);
-                });
+
+        for (String str : array) {
+            if(findNumberOfElements(str) == findMaxElements(array)) {
+                StringBuilder element = new StringBuilder();
+                String[] buff = str.split("\\\\");
+                for (int j = 0; j < findNumberOfElements(str); j++) {
+                    if (j != 0) element.append("\\");
+                    element.append(buff[j]);
+                    arraySet.add(element.toString());
+                }
+            }
+        }
+
         return new ArrayList<>(arraySet);
     }
 
@@ -41,9 +47,11 @@ public class MassiveSort {
         }
     }
 
-    private static int findMaxSorts(List<String> list) {
+    private static int findMaxElements(String[] array) {
+        checkArrayForNull(array);
+
         int max = 0;
-        for (String str : list) {
+        for (String str : array) {
             int strLength = findNumberOfElements(str);
             max = Math.max(max, strLength);
         }
