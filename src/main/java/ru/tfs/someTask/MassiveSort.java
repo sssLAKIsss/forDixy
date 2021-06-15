@@ -25,16 +25,14 @@ public class MassiveSort {
         checkArrayForNull(array);
 
         Set<String> arraySet = new HashSet<>(Set.of(array));
-
-        for (String str : array) {
-            if(findNumberOfElements(str) == findMaxElements(array)) {
-                StringBuilder element = new StringBuilder();
-                String[] buff = str.split("\\\\");
-                for (int j = 0; j < findNumberOfElements(str); j++) {
-                    if (j != 0) element.append("\\");
-                    element.append(buff[j]);
-                    arraySet.add(element.toString());
-                }
+        for (String s : array) {
+            StringBuilder element = new StringBuilder();
+            String[] buff = s.split("\\\\");
+            for (int j = 0; j < buff.length; j++) {
+                if (j != 0) element.append("\\");
+                element.append(buff[j]);
+                arraySet.add(element.toString());
+                System.out.println(element);
             }
         }
 

@@ -146,4 +146,47 @@ public class MassiveSortTests {
         List<String> result = testObject.sortByDepartmentCode(testArray);
         Assert.assertEquals(expectResult, result);
     }
+
+    @Test
+    public void test8() {
+        String[] testArray = new String[] {
+                "K3\\SK3\\SSK3\\SSSK3\\SSSSK3\\SSSSSK3",
+                "K3\\SK3\\SSK3\\SSSK1\\SSSSK3\\SSSSSK3",
+        };
+
+        List<String> expectResult = List.of(
+                "K3",
+                "K3\\SK3",
+                "K3\\SK3\\SSK3",
+                "K3\\SK3\\SSK3\\SSSK3",
+                "K3\\SK3\\SSK3\\SSSK3\\SSSSK3",
+                "K3\\SK3\\SSK3\\SSSK3\\SSSSK3\\SSSSSK3",
+                "K3\\SK3\\SSK3\\SSSK1",
+                "K3\\SK3\\SSK3\\SSSK1\\SSSSK3",
+                "K3\\SK3\\SSK3\\SSSK1\\SSSSK3\\SSSSSK3"
+        );
+        List<String> result = testObject.sortByDepartmentCode(testArray);
+        Assert.assertEquals(expectResult, result);
+    }
+
+    @Test
+    public void test9() {
+        String[] testArray = new String[] {
+                "K3\\SK3\\SSK3\\SSSK3\\SSSSK3\\SSSSSK3",
+                "K1\\SK3",
+        };
+
+        List<String> expectResult = List.of(
+                "K3",
+                "K3\\SK3",
+                "K3\\SK3\\SSK3",
+                "K3\\SK3\\SSK3\\SSSK3",
+                "K3\\SK3\\SSK3\\SSSK3\\SSSSK3",
+                "K3\\SK3\\SSK3\\SSSK3\\SSSSK3\\SSSSSK3",
+                "K1",
+                "K1\\SK3"
+        );
+        List<String> result = testObject.sortByDepartmentCode(testArray);
+        Assert.assertEquals(expectResult, result);
+    }
 }
